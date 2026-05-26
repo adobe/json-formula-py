@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "json-formula"
+version = "0.1.0"
+description = "A native Python implementation of the Adobe JSON Formula specification."
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+license-files = ["LICENSE", "LICENSE.upstream", "NOTICE.upstream.txt"]
+authors = [
+  {name = "OpenAI Codex"},
+]
+keywords = ["json", "formula", "expression", "query-language", "spreadsheet"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.optional-dependencies]
+dev = [
+  "build>=1.2",
+  "pytest>=8",
+  "twine>=5",
+  "wheel>=0.46",
+]
+
+[project.urls]
+Homepage = "https://github.com/lrosenthol/json-formula-py"
+Documentation = "https://github.com/lrosenthol/json-formula-py#readme"
+Issues = "https://github.com/lrosenthol/json-formula-py/issues"
+Specification = "https://opensource.adobe.com/json-formula/"
+Repository = "https://github.com/lrosenthol/json-formula-py"
+Reference-Implementation = "https://github.com/adobe/json-formula/"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+json_formula = [
+  "_vendor/json_formula_js/*.js",
+  "_vendor/json_formula_js/*.mjs",
+  "_vendor/json_formula_js/*.json",
+  "_vendor/json_formula_js/tutorial/*.js",
+]
