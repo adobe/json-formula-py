@@ -177,7 +177,21 @@ def _datedif(date1_arg: float, date2_arg: float, unit_arg: str) -> int:
     if unit == "yd":
         if day_diff < 0:
             month_diff -= 1
-        date2 = date2.replace(year=date1.year + 1 if month_diff < 0 else date1.year)
+        target_year = date1.year + 1 if month_diff < 0 else date1.year
+        try:
+            date2 = date2.replace(year=target_year)
+        except ValueError:
+            # Feb 29 in a non-leap year rolls over to March 1 (matching JS Date semantics)
+            date2 = datetime(
+                target_year,
+                3,
+                1,
+                date2.hour,
+                date2.minute,
+                date2.second,
+                date2.microsecond,
+                date2.tzinfo,
+            )
         return math.floor(_get_date_num(date2) - _get_date_num(date1))
     raise function_error(f'Unrecognized unit parameter "{unit}" for datedif()')
 
